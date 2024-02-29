@@ -23,11 +23,9 @@ $myUpdateChecker = PucFactory::buildUpdateChecker(
 //Set the branch that contains the stable release.
 $myUpdateChecker->setBranch('main');
 
-
+$core_plugins = [];
 
 // Include all features
 require_once 'features/loader.php';
 
-$core_plugins = [];
 
-\CORE_LOADER\CORE_LOADER::initiate_features();
