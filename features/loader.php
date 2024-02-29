@@ -21,8 +21,9 @@ class CORE_LOADER
      */
     public static function initiate_features()
     {
+        $directories = $this->directories;
         // Loop through each directory
-        foreach ($this->directories as $directory) {
+        foreach ($directories as $directory) {
             // Create the file path based on the directory name
             $filePath = $directory . '/' . $directory . '.php';
 
