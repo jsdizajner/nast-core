@@ -12,6 +12,19 @@
 
 defined( 'ABSPATH' ) || exit;
 
+use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+
+$myUpdateChecker = PucFactory::buildUpdateChecker(
+    'https://github.com/jsdizajner/nast-core',
+    __FILE__,
+    'nast-core'
+);
+
+//Set the branch that contains the stable release.
+$myUpdateChecker->setBranch('main');
+
+
+
 // Include all features
 require_once 'features/loader.php';
 
