@@ -25,7 +25,4 @@ $myUpdateChecker->setBranch('main');
 
 $core_plugins = [];
 
-// Include all features
-require_once 'features/loader.php';
-
 
