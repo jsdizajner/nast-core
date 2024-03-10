@@ -25,14 +25,13 @@ class CSV_Importer
          * @param array $options
          * @return array $options
          */
-        function nastcsvimporter__add_column_to_importer( $options ) {
+        add_filter( 'woocommerce_csv_product_import_mapping_options', function( $options ) {
 
             // column slug => column name
             $options[  CSV_Importer::PRODUCTBRAND_COLUMN  ] = 'Supplier';
 
             return $options;
-        }
-        add_filter( 'woocommerce_csv_product_import_mapping_options', 'nastcsvimporter__add_column_to_importer' );
+        } );
 
         /**
          * Add automatic mapping support for 'Custom Column'. 
@@ -41,15 +40,14 @@ class CSV_Importer
          * @param array $columns
          * @return array $columns
          */
-        function nastcsvimporter__add_column_to_mapping_screen( $columns ) {
+        add_filter( 'woocommerce_csv_product_import_mapping_default_columns', function( $columns ) {
             
             // potential column name => column slug
             $columns['Supplier'] = CSV_Importer::PRODUCTBRAND_COLUMN;
             $columns['supplier'] = CSV_Importer::PRODUCTBRAND_COLUMN;
 
             return $columns;
-        }
-        add_filter( 'woocommerce_csv_product_import_mapping_default_columns', 'nastcsvimporter__add_column_to_mapping_screen' );
+        } );
 
         /**
          * Process the data read from the CSV file.
@@ -59,7 +57,7 @@ class CSV_Importer
          * @param array $data - CSV data read for the product.
          * @return WC_Product $object
          */
-        function nastcsvimporter__process_import( $object, $data ) {
+        add_filter( 'woocommerce_product_import_pre_insert_product_object', function( $object, $data ) {
             
             if ( ! empty( $data[  CSV_Importer::PRODUCTBRAND_COLUMN  ] ) ) {
                 
@@ -83,8 +81,7 @@ class CSV_Importer
             }
 
             return $object;
-        }
-        add_filter( 'woocommerce_product_import_pre_insert_product_object', 'nastcsvimporter__process_import', 10, 2 );
+        }, 10, 2 );
 
     }
 }
