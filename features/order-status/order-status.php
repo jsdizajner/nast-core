@@ -105,7 +105,7 @@ function wc_contact_status_style()
 		color: #202aa2;
     	background: #4bb9fb;
 		border-radius: 4px;
-		border-bottom: 1pxsolidrgba(0,0,0,.05);
+		border-bottom: 1px solid rgba(0,0,0,.05);
 		margin: -0.25em 0;
 		cursor: inherit!important;
 		white-space: nowrap;
