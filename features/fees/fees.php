@@ -69,7 +69,7 @@ function render_fees_js()
  */
 
 // Part 1: Assign fee
-add_action('woocommerce_cart_calculate_fees', 'heba_add_checkout_fee_for_gateway');
+add_action('woocommerce_cart_calculate_fees', 'add_checkout_fee_for_gateway');
 
 /**
  * Adds fee based on selected payment methods
@@ -77,24 +77,24 @@ add_action('woocommerce_cart_calculate_fees', 'heba_add_checkout_fee_for_gateway
  *
  * @return void
  */
-function heba_add_checkout_fee_for_gateway()
+function add_checkout_fee_for_gateway()
 {
     $chosen_gateway = WC()->session->get('chosen_payment_method');
     $fee = carbon_get_theme_option('cod_fee');
     if ($chosen_gateway == 'cod') {
-        WC()->cart->add_fee(__('Poplatok za platbu dobierkou', 'woocommerce'), 1.25, true, '');
+        WC()->cart->add_fee(__('Poplatok za platbu dobierkou', 'woocommerce'), $fee, true, '');
     }
 }
 
 // Part 2: Reload checkout on payment gateway change
-add_action('woocommerce_review_order_before_payment', 'heba_refresh_checkout_on_payment_methods_change');
+add_action('woocommerce_review_order_before_payment', 'refresh_checkout_on_payment_methods_change');
 
 /**
  * Trigger javascript refresh page on Payment Method Change
  *
  * @return void
  */
-function heba_refresh_checkout_on_payment_methods_change()
+function refresh_checkout_on_payment_methods_change()
 {
     ?>
     <script type="text/javascript">
