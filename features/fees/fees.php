@@ -13,30 +13,44 @@ function create_fees_fields()
         ->set_page_parent( 'woocommerce' )
         ->add_fields( array(
             Field::make( 'separator', 'cod_separator', __( 'Poplatok za platbu na dobierku', 'nast-core' ) ),
+            Field::make( 'text', 'cod_fee_label', __( 'Položka na faktúre', 'nast-core' ) )
+                ->set_attribute( 'type', 'text' ),
             Field::make( 'text', 'cod_fee', __( 'Poplatok v EUR', 'nast-core' ) )
                 ->set_attribute( 'type', 'number' )
                 ->set_help_text( 'Finálny poplatok: <span class="cod_fee_output" style="font-weight:bold"></span> &euro; (s DPH)' ),
+
         ) );
 }
 
 // Add fields and conditional logic for the fields
-add_action('carbon_fields_container_poplatky_after_fields', 'render_fees_js');
+add_action('admin_footer', 'render_fees_js', 1100000);
 function render_fees_js()
 {
 
     ?>
-    <script type='text/javascript'>
-        window.addEventListener("DOMContentLoaded", (event) => {
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", () => {
+            console.log('DOM fully loaded and parsed');
             const codFeeInput = document.querySelector('input[name="carbon_fields_compact_input[_cod_fee]"]');
             const codFeeOutput = document.querySelector('.cod_fee_output');
 
+            if (!codFeeInput) {
+                console.error('Input element not found');
+                return;
+            }
+
+            if (!codFeeOutput) {
+                console.error('Output element not found');
+                return;
+            }
+
             // Add event listener to input element
             codFeeInput.addEventListener('input', function() {
-                inputValue = parseFloat(codFeeInput.value);
+                const inputValue = parseFloat(codFeeInput.value);
                 // Check if inputValue is a valid number
                 if (!isNaN(inputValue)) {
                     // Calculate 20% of the input value and add it to the original value
-                    let result = inputValue * 1.2;
+                    const result = inputValue * 1.2;
                     // Update the content of the span with the calculated result
                     codFeeOutput.textContent = result.toFixed(2); // Displaying with 2 decimal places
                 } else {
@@ -47,15 +61,18 @@ function render_fees_js()
 
             // Function to update output element with initial value
             function updateOutput() {
-                let initialValue = parseFloat(codFeeInput.value);
+                const initialValue = parseFloat(codFeeInput.value);
                 if (!isNaN(initialValue)) {
-                    let result = initialValue * 1.2;
+                    const result = initialValue * 1.2;
                     codFeeOutput.textContent = result.toFixed(2); // Displaying with 2 decimal places
                 }
             }
 
             // Call the function to update output element after page has loaded
             window.addEventListener('load', updateOutput);
+
+            // Also call the function directly in case the window load event is not sufficient
+            updateOutput();
         });
 
 
@@ -81,8 +98,9 @@ function add_checkout_fee_for_gateway()
 {
     $chosen_gateway = WC()->session->get('chosen_payment_method');
     $fee = carbon_get_theme_option('cod_fee');
+    $label = carbon_get_theme_option('cod_fee_label');
     if ($chosen_gateway == 'cod') {
-        WC()->cart->add_fee(__('Poplatok za platbu dobierkou', 'woocommerce'), $fee, true, '');
+        WC()->cart->add_fee(__($label, 'nast-core'), $fee, true, '');
     }
 }
 
