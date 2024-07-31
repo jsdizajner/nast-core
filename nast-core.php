@@ -37,3 +37,4 @@ require_once NAST_CORE_DIR .'/features/csv-importer.php';
 require_once NAST_CORE_DIR .'/features/zaslatSK/init.php';
 require_once NAST_CORE_DIR .'/features/fees/fees.php';
 require_once NAST_CORE_DIR .'/features/slider/slider.php';
+require_once NAST_CORE_DIR .'/features/shipment/shipment.php';
