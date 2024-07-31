@@ -96,6 +96,12 @@ add_action('woocommerce_cart_calculate_fees', 'add_checkout_fee_for_gateway');
  */
 function add_checkout_fee_for_gateway()
 {
+    // if shipping is local do not add fee
+    $shipping = wc_get_chosen_shipping_method_ids();
+    if ($shipping[0] === 'local_pickup') {
+        return;
+    }
+
     $chosen_gateway = WC()->session->get('chosen_payment_method');
     $fee = carbon_get_theme_option('cod_fee');
     $label = carbon_get_theme_option('cod_fee_label');
