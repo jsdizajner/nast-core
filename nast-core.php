@@ -3,7 +3,7 @@
  * Plugin Name: NAST Core
  * Plugin URI: https://nast.sk
  * Description: Core Business functionality
- * Version: 1.2.8
+ * Version: 1.2.9
  * Author: SIPOS.DIGITAL
  * Author URI: https://sipos.digital
  * Text Domain: nast-core
@@ -38,3 +38,4 @@ require_once NAST_CORE_DIR .'/features/zaslatSK/init.php';
 require_once NAST_CORE_DIR .'/features/fees/fees.php';
 require_once NAST_CORE_DIR .'/features/slider/slider.php';
 require_once NAST_CORE_DIR .'/features/shipment/shipment.php';
+require_once NAST_CORE_DIR .'/features/attachments/attachments.php';
