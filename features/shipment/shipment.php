@@ -1,4 +1,13 @@
 <?php
+use Automattic\Jetpack\Constants;
+use Automattic\WooCommerce\Internal\Orders\CouponsController;
+use Automattic\WooCommerce\Internal\Orders\TaxesController;
+use Automattic\WooCommerce\Internal\Admin\Orders\MetaBoxes\CustomMetaBox;
+use Automattic\WooCommerce\Utilities\ArrayUtil;
+use Automattic\WooCommerce\Utilities\NumberUtil;
+use Automattic\WooCommerce\Utilities\OrderUtil;
+use Automattic\WooCommerce\Utilities\StringUtil;
+
 defined( 'ABSPATH' ) || exit;
 
 
@@ -33,3 +42,36 @@ function hide_shipping_when_free_is_available( $rates, $package ) {
 }
 
 add_filter( 'woocommerce_package_rates', 'hide_shipping_when_free_is_available', 10, 2 );
+
+// Part 2: Reload checkout on payment gateway change
+add_action('woocommerce_review_order_before_payment', 'refresh_billing_postcode');
+
+/**
+ * Trigger javascript refresh page on Payment Method Change
+ *
+ * @return void
+ */
+function refresh_billing_postcode()
+{
+    ?>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $('form.checkout').on('change', 'input[name^="billing_postcode"]', function() {
+                // Trigger update_checkout to refresh the order review section
+                $('body').trigger('update_checkout', { update_shipping_method: true });
+            });
+        });
+    </script>
+    <?php
+}
+
+add_filter('woocommerce_update_order_review_fragments', function ( $fragments ) {
+
+    // Prepare shipping fragment
+    ob_start();
+    wc_cart_totals_shipping_html();
+    $shipping_fragment = ob_get_clean();
+    $fragments['.woocommerce-shipping-methods'] = $shipping_fragment;
+
+    return $fragments;
+});
