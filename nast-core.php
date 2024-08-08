@@ -39,4 +39,3 @@ require_once NAST_CORE_DIR .'/features/fees/fees.php';
 require_once NAST_CORE_DIR .'/features/slider/slider.php';
 require_once NAST_CORE_DIR .'/features/shipment/shipment.php';
 require_once NAST_CORE_DIR .'/features/attachments/attachments.php';
-require_once NAST_CORE_DIR .'/features/notifications/notifications.php';
