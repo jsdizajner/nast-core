@@ -17,6 +17,5 @@ function load_legal_attachments( $attachments, $email_id, $order, $email ) {
         $attachments[] = $upload_dir['basedir'] . "/2024/08/attachments/podmienky_ochrany_osobnych_udajov.pdf";
         $attachments[] = $upload_dir['basedir'] . "/2024/08/attachments/reklamacny_poriadok.pdf";
     }
-    ray($attachments);
     return $attachments;
 }
