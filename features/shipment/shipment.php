@@ -44,7 +44,7 @@ function hide_shipping_when_free_is_available( $rates, $package ) {
 add_filter( 'woocommerce_package_rates', 'hide_shipping_when_free_is_available', 10, 2 );
 
 // Part 2: Reload checkout on payment gateway change
-add_action('woocommerce_review_order_before_payment', 'refresh_billing_postcode');
+add_action('woocommerce_review_order_after_shipping', 'refresh_billing_postcode');
 
 /**
  * Trigger javascript refresh page on Payment Method Change
@@ -53,16 +53,15 @@ add_action('woocommerce_review_order_before_payment', 'refresh_billing_postcode'
  */
 function refresh_billing_postcode()
 {
-    ?>
-    <script type="text/javascript">
+
+    echo '<!-- Refresher --><script type="text/javascript">
         jQuery(document).ready(function($) {
-            $('form.checkout').on('change', 'input[name^="billing_postcode"]', function() {
+            $("form.checkout").on("change", "input[name^=\'billing_postcode\']", function() {
                 // Trigger update_checkout to refresh the order review section
-                $('body').trigger('update_checkout', { update_shipping_method: true });
+                $("body").trigger("update_checkout", { update_shipping_method: true });
             });
         });
-    </script>
-    <?php
+    </script>';
 }
 
 add_filter('woocommerce_update_order_review_fragments', function ( $fragments ) {
