@@ -3,7 +3,7 @@
  * Plugin Name: NAST Core
  * Plugin URI: https://nast.sk
  * Description: Core Business functionality
- * Version: 1.4.2
+ * Version: 1.5.2
  * Author: SIPOS.DIGITAL
  * Author URI: https://sipos.digital
  * Text Domain: nast-core
@@ -27,8 +27,6 @@ $myUpdateChecker = PucFactory::buildUpdateChecker(
 //Set the branch that contains the stable release.
 $myUpdateChecker->setBranch('main');
 
-$core_plugins = [];
-
 require_once NAST_CORE_DIR .'/vendor/autoload.php';
 \Carbon_Fields\Carbon_Fields::boot();
 
@@ -40,3 +38,5 @@ require_once NAST_CORE_DIR .'/features/slider/slider.php';
 require_once NAST_CORE_DIR .'/features/shipment/shipment.php';
 require_once NAST_CORE_DIR .'/features/attachments/attachments.php';
 require_once NAST_CORE_DIR .'/features/stock/stock.php';
+require_once NAST_CORE_DIR .'/features/custom-price/custom-price.php';
+
