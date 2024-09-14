@@ -154,7 +154,6 @@ function custom_variation_prices_with_custom_price($prices_array, $product) {
     return $prices_array;
 }
 
-
 add_filter( 'woocommerce_sale_flash', 'nova_percentage_sale', 11, 3 );
 function nova_percentage_sale( $text, $post, $product ) {
     $discount = 0;
@@ -186,3 +185,78 @@ function nova_percentage_sale( $text, $post, $product ) {
 
     return $text;
 }
+
+add_filter('woocommerce_available_variation', 'adjust_variation_price_for_vip', 10, 3);
+function adjust_variation_price_for_vip($variation_data, $product, $variation) {
+    if (current_user_can('nast_vip_customer')) {
+        // Get the custom price for this variation
+        $custom_price = get_post_meta($variation->get_id(), '_custom_price', true);
+
+        // If there's a custom price, modify the display
+        if (!empty($custom_price)) {
+            $regular_price = $variation->get_regular_price();
+            $variation_data['price_html'] = '<span class="price">' . wc_format_sale_price($regular_price, $custom_price) . '</span>';
+        }
+    }
+    return $variation_data;
+}
+
+/**
+ * Bulk action support
+ */
+
+/**
+ * @snippet       Custom field bulk edit - WooCommerce
+ * @how-to        Get CustomizeWoo.com FREE
+ * @author        Rodolfo Melogli
+ * @compatible    WooCommerce 4.0
+ * @community     https://businessbloomer.com/club/
+ */
+
+// Note: change all occurrences of "custom_field" with the key of your custom field
+
+add_action( 'woocommerce_product_bulk_edit_start', 'bbloomer_custom_field_bulk_edit_input' );
+
+function bbloomer_custom_field_bulk_edit_input() {
+    ?>
+    <div class="inline-edit-group">
+        <label class="alignleft">
+            <span class="title"><?php _e( 'Loyal Price', 'nast-core' ); ?></span>
+            <span class="input-text-wrap">
+            <input type="text" name="_custom_price" class="text" value="">
+         </span>
+        </label>
+    </div>
+    <?php
+}
+
+add_action( 'woocommerce_product_bulk_edit_save', 'bbloomer_custom_field_bulk_edit_save' );
+function bbloomer_custom_field_bulk_edit_save( $product ) {
+    if ( isset( $_REQUEST['_custom_price'] ) ) {
+        $custom_field = $_REQUEST['_custom_price'];
+        if ($product->is_type('variable')) {
+            if( $product->get_available_variations() ) {
+                $variations = $product->get_available_variations();
+                if( $variations ) {
+                    foreach( $variations as $variation ) {
+                        update_post_meta( $variation[ 'variation_id' ], '_custom_price', wc_clean( $custom_field ) );
+                    }
+                }
+            }
+        } elseif ($product->is_type('simple')) {
+            update_post_meta( $post_id, '_custom_price', wc_clean( $custom_field ) );
+        }
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
