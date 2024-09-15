@@ -17,7 +17,8 @@ function bbloomer_free_shipping_cart_notice($content) {
     $current = WC()->cart->subtotal;
     if ( $current < $min_amount ) {
         $amount = $min_amount - $current;
-        $added_text = __(sprintf('Get&nbsp;<b>free shipping</b>&nbsp;if you order&nbsp;<span class="free-shipping-ammount">%s</span>&nbsp;more!', $amount), 'nast-core');
+        $amount = number_format( $amount, 2, '.', '');
+        $added_text = sprintf(__('Získajte&nbsp;<b>DOPRAVU ZDARMA</b>&nbsp;ak nakúpite tovar za&nbsp;<span class="free-shipping-ammount" style="font-weight: bold;">%s</span>! &nbsp;', 'nast-core'), $amount);
     } else {
         $added_text = __('Congratulations! Shipping is on us!', 'nast-core');
     }
