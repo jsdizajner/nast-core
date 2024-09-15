@@ -1,0 +1,130 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: NAST Core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-08-27 16:14+0000\n"
+"PO-Revision-Date: 2024-09-15 18:47+0000\n"
+"Last-Translator: \n"
+"Language-Team: Slovenčina\n"
+"Language: sk_SK\n"
+"Plural-Forms: nplurals=3; plural=( n == 1 ) ? 0 : ( n >= 2 && n <= 4 ) ? 1 : "
+"2;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.6.11; wp-6.6.2\n"
+"X-Domain: nast-core"
+
+#: features/stock/stock.php:33
+msgid ""
+" <span class=\"woocommerce-variation-stock-delayed\"><i class=\"fas fa-"
+"dolly\"></i> Na objednávku do 14 dní.</span> <br> <span style=\"font-weight: "
+"normal;color:#696969;\">Skladom u dodávateľa.</span>"
+msgstr ""
+" <span class=\"woocommerce-variation-stock-delayed\"><i class=\"fas fa-"
+"dolly\"></i> Na objednávku do 14 dní.</span> <br> <span style=\"font-weight: "
+"normal;color:#696969;\">Skladom u dodávateľa.</span>"
+
+#: features/stock/stock.php:53
+msgid ""
+"<span class=\"woocommerce-variation-stock-backorder\"><i class=\"fas fa-"
+"dolly\"></i> Na objednávku 3 - 7 dní.</span> <br> <span style=\"font-weight: "
+"normal;color:#696969;\">V prípade výnimiek v doprave Vás budeme kontaktovať "
+"e-mailom.</span>"
+msgstr ""
+"<span class=\"woocommerce-variation-stock-backorder\"><i class=\"fas fa-"
+"dolly\"></i> Na objednávku 3 - 7 dní.</span> <br> <span style=\"font-weight: "
+"normal;color:#696969;\">V prípade výnimiek v doprave Vás budeme kontaktovať "
+"e-mailom.</span>"
+
+#: features/stock/stock.php:44
+msgid ""
+"<span class=\"woocommerce-variation-stock-instock\"><i class=\"fas fa-"
+"shipping-fast\"></i> Skladom - odoslanie ihneď.</span> <br> <span "
+"style=\"font-weight: normal;color:#696969;\">V prípade výnimiek v doprave "
+"Vás budeme kontaktovať e-mailom.</span>"
+msgstr ""
+"<span class=\"woocommerce-variation-stock-instock\"><i class=\"fas fa-"
+"shipping-fast\"></i> Skladom - odoslanie ihneď.</span> <br> <span "
+"style=\"font-weight: normal;color:#696969;\">V prípade výnimiek v doprave "
+"Vás budeme kontaktovať e-mailom.</span>"
+
+#: features/order-status/order-status.php:42
+msgid "Change status to Contact Customer"
+msgstr "Zmeniť stav na Kontaktovať zákazníka"
+
+#: features/cart-shipping/cart-shipping.php:23
+msgid "Congratulations! Shipping is on us!"
+msgstr "Výborne, poštovné je na nás!"
+
+#: features/order-status/order-status.php:20
+msgid "Contact Customer"
+msgstr "Kontaktovať zákazníka"
+
+#: features/cart-shipping/cart-shipping.php:26
+msgid "Continue Shopping"
+msgstr "Pokračovať do obchodu!"
+
+#. Description of the plugin
+msgid "Core Business functionality"
+msgstr "Základné nastavenia a nadstavba systému WooCommerce"
+
+#: features/custom-price/custom-price.php:30
+#: features/custom-price/custom-price.php:69
+msgid "Custom Price"
+msgstr "Vernostná cena"
+
+#: features/stock/stock.php:25 features/stock/stock.php:62
+msgid "Delayed shipment"
+msgstr "Dodanie do 14 dni."
+
+#: features/custom-price/custom-price.php:33
+#: features/custom-price/custom-price.php:73
+msgid "Enter price for VIP Customers"
+msgstr "Vložte cenu pre vernostných zákazníkov"
+
+#. URI of the plugin
+msgid "https://nast.sk"
+msgstr "https://nast.sk"
+
+#. Author URI of the plugin
+msgid "https://sipos.digital"
+msgstr "https://sipos.digital"
+
+#: features/custom-price/custom-price.php:224
+msgid "Loyal Price"
+msgstr "Vernostná cena"
+
+#. Name of the plugin
+msgid "NAST Core"
+msgstr "NAST - Nadstavba pre platformu WooCommerce"
+
+#: features/fees/fees.php:16
+msgid "Položka na faktúre"
+msgstr "Položka na faktúre"
+
+#: features/fees/fees.php:12
+msgid "Poplatky"
+msgstr "Poplatky"
+
+#: features/fees/fees.php:18
+msgid "Poplatok v EUR"
+msgstr "Poplatok v EUR"
+
+#: features/fees/fees.php:15
+msgid "Poplatok za platbu na dobierku"
+msgstr "Poplatok za platbu na dobierku"
+
+#. Author of the plugin
+msgid "SIPOS.DIGITAL"
+msgstr "SIPOS.DIGITAL"
+
+#: features/slider/slider.php:7
+msgid "Slider"
+msgstr "Slider"
+
+#. Internal name of the custom role
+#: features/custom-price/custom-price.php:13
+msgid "VIP Customer"
+msgstr "Verný zákazník"
