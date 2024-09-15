@@ -13,8 +13,7 @@ defined( 'ABSPATH' ) || exit;
 add_action( 'nast_before_woocommerce_cart', 'bbloomer_free_shipping_cart_notice', 10, 1);
 
 function bbloomer_free_shipping_cart_notice($content) {
-    ray( WC()->cart);
-    $min_amount = 50; // YOUR FREE SHIPPING THRESHOLD
+    $min_amount = 100; // YOUR FREE SHIPPING THRESHOLD
     $current = WC()->cart->subtotal;
     if ( $current < $min_amount ) {
         $amount = $min_amount - $current;
