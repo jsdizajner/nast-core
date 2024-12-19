@@ -25,6 +25,11 @@ $myUpdateChecker = PucFactory::buildUpdateChecker(
     'nast-core'
 );
 
+add_action( 'init', function() {
+    update_option( 'wc_feature_woocommerce_brands_enabled', 'yes' );
+    update_option( 'woocommerce_remote_variant_assignment', 2 );
+} );
+
 //Set the branch that contains the stable release.
 $myUpdateChecker->setBranch('main');
 
