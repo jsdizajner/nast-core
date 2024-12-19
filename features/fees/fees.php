@@ -96,14 +96,18 @@ add_action('woocommerce_cart_calculate_fees', 'add_checkout_fee_for_gateway');
  */
 function add_checkout_fee_for_gateway()
 {
-    $chosen_gateway = WC()->session->get('chosen_shipping_methods');
-    if (in_array('local_pickup', $chosen_gateway)) {
+    $chosen_shipping = WC()->session->get('chosen_shipping_methods');
+    $containsLocalPickup = !empty(array_filter($chosen_shipping, function ($value) {
+        return str_contains($value, 'local_pickup');
+    }));
+    if ($containsLocalPickup) {
         return;
     }
 
+    $chosen_gateway = WC()->session->get('chosen_payment_method');
     $fee = carbon_get_theme_option('cod_fee');
     $label = carbon_get_theme_option('cod_fee_label');
-    if (in_array('cod', $chosen_gateway)) {
+    if ($chosen_gateway == 'cod') {
         WC()->cart->add_fee(__($label, 'nast-core'), $fee, true, '');
     }
 }
@@ -122,7 +126,7 @@ function refresh_checkout_on_payment_methods_change()
     <script type="text/javascript">
         jQuery(document).ready(function($)
         {
-            $('form.checkout').on( 'change', 'input[name^=\'payment_method\']', function()
+            $('form.checkout').on( 'change', 'input[name^=\'payment_method\'], input[name^=\'shipping_method\']', function()
             {
                 $('body').trigger('update_checkout');
             });
