@@ -82,6 +82,7 @@ function render_fees_js()
 /**
  * @snippet WooCommerce Add fee to checkout for a gateway ID
  * @date 2022/09
+ * @update 19/12/2024 @ changed from 'chosen_shipping_method' to 'chosen_shipping_methodS' as native object array
  */
 
 // Part 1: Assign fee
@@ -95,15 +96,14 @@ add_action('woocommerce_cart_calculate_fees', 'add_checkout_fee_for_gateway');
  */
 function add_checkout_fee_for_gateway()
 {
-    $chosen_gateway = WC()->session->get('chosen_payment_method');
-
-    if ($chosen_gateway == 'local_pickup') {
+    $chosen_gateway = WC()->session->get('chosen_shipping_methods');
+    if (in_array('local_pickup', $chosen_gateway)) {
         return;
     }
 
     $fee = carbon_get_theme_option('cod_fee');
     $label = carbon_get_theme_option('cod_fee_label');
-    if ($chosen_gateway == 'cod') {
+    if (in_array('cod', $chosen_gateway)) {
         WC()->cart->add_fee(__($label, 'nast-core'), $fee, true, '');
     }
 }
